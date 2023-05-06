@@ -1,0 +1,75 @@
+\section{Lattice Structure in the set of stable Matching}
+
+\subsection{Some glimpses from Lattice theory}
+    \begin{itemize}
+        \item Let $(S,\preceq)$ be a \textbf{poset}. We say that an element $x \in S$ is related to an element $y \in S$ if $x \preceq y$.
+         
+        \item If there exist an element in the poset that is \textit{greater than} (is related to) every other element. Such an element is called the \textbf{greatest element} of the poset. i.e. $a$ is the greatest element of the poset $(S,\preceq)$ if $b \preceq a$ for all $b \in S$.
+         
+        \item An element is called the \textbf{least element} if it is \textit{less than} (is related to) all the other elements in the poset. i.e. $a$ is the least element of $(S, \preceq)$ if $a \preceq b$ for all $b \in S$.
+         
+        \item If there exist an element, less than or equal to all the elements in $A \subseteq S$ then the element is called as a \textbf{lower bound of A}. If $l$ is an element of $S$ such that $l \preceq a$ for all elements $a \in A$, then $l$ is the lower bound of A.
+         
+        \item For $A \subseteq S$, If  $\exists\:u \in S$ such that $a \preceq u$ for all elements $a \in A$, then $u$ is called an \textbf{upper bound}.
+    \end{itemize}
+
+\subsection{Lattice : Definition}
+    \begin{itemize}
+        \item The element $x$ is called the \textbf{least upper bound} of the subset $A$ if $x$ is an upper bound that is less than every other upper bounds of A
+         
+        \item If the least upper bound of a set exist, then it's \textit{unique}.
+         
+        \item The element $y$ is called the \textbf{greatest lower} bound of $A$ if $y$ is a lower bound of $A$ and $z \preceq y$ whenever $z$ is a lower bound of $A$.
+         
+        \item If the greatest lower bound of a set exist, then it's \textit{unique}.
+         
+        \item \textbf{Definition :} A partially ordered set in which every pair of elements has both a \textit{least upper bound} and a \textit{greatest lower bound} is called a \textbf{lattice}.
+         
+        \item \textbf{Example :} $(P(S), \subseteq)$ is a lattice : Let $A$ and $B$ be two subsets of $S$. The least upper bound and the greatest lower bound of $A$ and $B$ are $A \cup B$ and $A \cap B$, respectively, and consequently both the operations are closed so, $(P(S), \subseteq)$ forms a \textit{lattice}.
+    \end{itemize}
+
+\subsection{A Distributive lattice}
+    \begin{itemize}
+        \item  For $a, b \in S$, each pair of elements $a, b$ has a greatest lower bound, or \textbf{meet}, denoted by $a \land b$, so that $a \land b \preceq a, a \land b \preceq b$, and there is no element $c$ such that $c \preceq a, c \preceq b$ and $a \land b \prec c$. (Note : $x \prec y$ means $x \preceq y$ and $x \neq y$)
+         
+        \item For $a, b \in S$, each pair of elements $a, b$ has a least upper bound, or \textbf{join}, denoted by $a \lor b$, so that $a  \preceq a \lor b, b \preceq a \lor b$, and there is no element $c$ such that $a \preceq c, b \preceq c$ and $c \prec a \lor b$.
+         
+        \item  If the distributive laws holds in $S$, namely $a \lor (b \land c) = (a \lor b)\land(a \lor c)$ and $a \land (b \lor c) = (a  \land b)\lor(a \land c)$, We say that the Lattice $S$ is a distributive lattice.
+    \end{itemize}    
+
+\subsection{Meet operation between two matchings}
+
+We denote by $M \wedge M^\prime$ the stable matching in which each man obtains the better of his partners in $M$ and $M^\prime$, and by $\wedge_{M \in S} M$, or $\wedge S$ the stable matching in which each man is given the best of his partners in all the stable matchings in the set $S$
+
+In $M \wedge M^\prime$, each woman obtains the poorer of her partners in $M$ and $M^\prime$
+\newline
+It is the consequence of the previous theorem that the man-optimal stable matching is also the woman-pessimal.
+
+\subsection{Join operation between two matchings}
+    Again by anticipating the lattice properties, we denote by $M \vee M^\prime$ the stable matching in which each man receives the poorer of his partners in $M$ and $M^\prime$.
+    
+    As before, the notation is extended to $\vee_{M \in S}M$ or $\vee S$, for the stable matching in which each man is given the worst of his partners in all the stable matchings in the set $S$.
+
+\subsection{The Greatest lower bound for $M$ and $M^\prime$}
+
+\begin{theorem}\label{thm_1_9}
+$M \wedge M^\prime$ is the Greatest lower bound for $M$ and $M^\prime$
+\end{theorem}
+
+\begin{proof}
+It is immediate that $M \wedge M^\prime \preceq M, M \wedge M^\prime \preceq M^\prime$. Further, if $M^*$ is any stable matching satisfying $M^* \preceq M, M^* \preceq M^\prime$, then each man must have a partner in $M^*$ at least as good as his partner in each of $M$ and $M^\prime$, so that $M^* \preceq M \wedge M^\prime$. So $M \wedge M^\prime$ is the greatest lower bound for $M$ and $M^\prime$. 
+\end{proof}
+
+    The proof that $M \vee M^\prime$ is the least upper bound is similar, and this establishes that $(M, \preceq)$ is a \textbf{lattice}.
+
+\subsection{Distributive Lattice}
+
+\begin{theorem}\label{thm_1_10}
+    For a given instance of the stable marriage problem, the partial order $(M, \preceq)$ forms a \textit{distributive lattice}, with $M \wedge M^\prime$ representing the meet of $M$ and $M^\prime$, and $M \vee M^\prime$ the join.
+\end{theorem}
+
+\begin{proof}
+    For the first distributive property, let $X$, $Y$ and $Z$ be stable matchings. If $p_Y(m) = p_Z(m) = w$, then it is immediate that in both $U  = X \wedge (Y \vee Z)$ and $V = (X \wedge Y ) \vee (X \wedge Z)$, $m$ is partnered by whichever of $p_X(m)$ and $w$ he most prefers. Otherwise, it is easy to verify that, in both $U$ and $V$, $m$ is partnered by $p_Z(m)$ if m prefers $Y$ to $Z$ to $X$, by $p_Y(m)$ if $m$ prefers $Z$ to $Y$ to $X$, and in all other cases by $p_X(m)$. Hence every man has the same partner in $U$ as he has in $V$ , and therefore $U = V$
+    
+\end{proof}
+    

@@ -1,0 +1,148 @@
+\section{The Stable Marriage problem}
+The \textbf{stable marriage problem} \textit{(SM)} describes the problem of finding a stable matching between two distinct, equally sized sets of players with complete preferences (namely \textbf{instances})\cite{gusfield_irving_1989}.
+ 
+\subsection{The Game}
+Consider two distinct sets, $\mathbb{M}$ and $\mathbb{W}$, each of size $\mathbf{N}$, and let us refer to these sets as the set of men and women respectively. Each element of $\mathbb{M}$ and $\mathbb{W}$ has a ranking of all the other set`s element associated with it, and we call this ranking as their preference list.
+ 
+ 
+
+\subsection{The Stable Marriage Problem }
+We can consider the preference lists for the elements of each set as a function which produces tuples. We call these functions $f$ and $g$ respectively:
+$$f:\mathbb{M} \longrightarrow \mathbb{W}^N$$
+$$g:\mathbb{W} \longrightarrow \mathbb{M}^N$$
+This construction of men, women and their preference lists is called a game of size $N$, and is denoted by $(\mathbb{M}$,$\mathbb{W})$. This game is used to model instances of \textit{stable marriage}.
+ 
+\subsection{Preference list}
+Each person's preference list is a \textbf{ranking} over all of the members of the opposite sex.
+\begin{center}
+\begin{tabular}{ cc }   % top level tables, with 2 columns
+% leftmost table of the top level table
+\begin{tabular}{ |c||c|c|c|c|c|c|c| } 
+\hline
+1 & 5 & 7 & 1 & 2 & 6 & 3 & 4 \\
+\hline
+2 & 1 & 5 & 7 & 4 & 6 & 3 & 2 \\
+\hline
+3 & 7 & 3 & 5 & 1 & 2 & 6 & 4 \\
+\hline
+4 & 3 & 4 & 6 & 2 & 1 & 7 & 5 \\
+\hline
+5 & 7 & 1 & 5 & 3 & 2 & 6 & 4 \\
+\hline
+6 & 4 & 6 & 2 & 1 & 3 & 5 & 7 \\
+\hline
+7 & 5 & 7 & 1 & 3 & 6 & 4 & 2 \\
+\hline
+\end{tabular} &  % starting rightmost sub table
+% table 2
+\begin{tabular}{ |c||c|c|c|c|c|c|c| } 
+\hline
+1 & 4 & 3 & 5 & 2 & 6 & 1 & 7 \\
+\hline
+2 & 3 & 2 & 6 & 7 & 1 & 5 & 4 \\
+\hline
+3 & 2 & 1 & 7 & 6 & 5 & 3 & 4 \\
+\hline
+4 & 1 & 7 & 3 & 6 & 2 & 5 & 4 \\
+\hline
+5 & 5 & 6 & 4 & 3 & 2 & 1 & 7 \\
+\hline
+6 & 6 & 4 & 1 & 3 & 7 & 5 & 2 \\
+\hline
+7 & 7 & 5 & 1 & 3 & 6 & 2 & 4 \\
+\hline
+\end{tabular} \\ \\
+Men's Preferences & Women's Preferences \\ 
+\end{tabular}
+\begin{figure}[ht]
+  \caption{A stable matching instance of size $7$}
+  \label{FIG_1_5}
+\end{figure}
+\end{center}
+
+\subsection{The Matching}
+    A matching ${M}$ is any \textbf{bijection} between $\mathbb{M}$ and $\mathbb{W}$. If a pair $(m,w) \in \mathbb{M} \times \mathbb{W}$ are matched in $M$, then we say that $p_M(m) = w$ and, equivalently, $p_M(w) = m$.
+ 
+
+\subsection{Preference}
+    Let $\mathbb{(M}$,$\mathbb{W)}$ be an instance of SM. Consider $m\in \mathbb{M}$ and $w,w^\prime \in \mathbb{W}$. We say that the man  $m$ prefers $w$ to $w^\prime$ if $w$ appears before $w^\prime \in f(m)$. The definition is equivalent for Women's preference list too\cite{dickerson}.
+ 
+\subsection{Stability}
+\textbf{Blocking Pairs : } A pair $(m,w)$ is said to \textbf{block} a matching $M$ if all of the following hold:
+    \begin{enumerate}
+  \item $m$ and $w$ arent matched in $M$, i.e. $p_M(m) \neq w$.
+  \item $m$ prefers $w$ to $p_M(m) = w^\prime$.
+  \item $w$ prefers $m$ to  $p_M(w) = m^\prime$ 
+\end{enumerate}
+
+
+\begin{center}
+\begin{tabular}{ cc }   % top level tables, with 2 columns
+% leftmost table of the top level table
+\begin{tabular}{ |c||c|c|c|c| } 
+\hline
+1 & 4 & 1 & 2 & 3\\
+\hline
+2 & 2 & 3 & 1 & 4\\
+\hline
+3 & 2 & 4 & 3 & 1\\
+\hline
+4 & 3 & 1 & 4 & 2\\
+\hline
+\end{tabular} &  % starting rightmost sub table
+% table 2
+\begin{tabular}{ |c||c|c|c|c| } 
+\hline
+1 & 4 & 1 & 3 & 2\\
+\hline
+2 & 1 & 3 & 2 & 4\\
+\hline
+3 & 1 & 2 & 3 & 4\\
+\hline
+4 & 4 & 1 & 3 & 2\\
+\hline
+\end{tabular} \\ \\
+Men's Preferences & Women's Preferences
+\end{tabular}
+\begin{figure}[ht]
+  \caption{A stable marriage instance of size $4$}
+  \label{FIG_1_7}
+\end{figure}
+\end{center}
+\textit{Note} : The matching $\{(1,3),(2,4),(3,2),(4,1)\}$ doesn't forms a stable matching, as because $(1,4)$ and $(2,3)$ forms a blocking pair.
+ 
+But, $\{(1,4),(2,3),(3,2),(4,1)\}$ forms a stable matching.
+
+ 
+\subsection{Stable Matching}
+A matching $M$ is said to be \textbf{stable} if it contains \textbf{no blocking pairs}, and unstable otherwise.
+ 
+A man $m$ and a woman $w$ constitute a \textbf{stable pair} if and only if $m$ and $w$ are partners in some stable matching $M$.
+ 
+If some man $m$ and woman $w$ are partners in all stable matchings, then $(m, w)$ is called a \textbf{fixed pair}.
+ 
+ 
+
+\subsection{Algorithm : Stability Check}
+\begin{center}
+\begin{minipage}{.7\linewidth}
+\begin{algorithm}[H]
+\caption{Stability checking algorithm}
+\begin{algorithmic}[1]
+\For {$m \coloneqq 1,2,\ldots n$}
+	\For {each $w$ such that $m$ prefers $w$ to $p_M(m)$}
+	    \If {$w$ prefers $m$ to $p_M(w)$ }
+		    \State report matching unstable
+		    \State halt
+		\EndIf
+	\EndFor
+\EndFor
+\State report matching stable
+\end{algorithmic}
+\end{algorithm}
+\end{minipage}
+\begin{figure}[ht]
+  \caption{Stability checking algorithm}
+  \label{FIG_1_6}
+\end{figure}
+\end{center}

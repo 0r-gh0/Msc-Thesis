@@ -1,0 +1,73 @@
+\section{Minimal Differences and Chains}
+
+The partial order $D(\mathcal{F})$ provides a compact representation of $\mathcal{F}$, but its elements, the minimal differences of $\mathcal{F}$, are defined from the (generally hard to obtain) irreducible elements of $\mathcal{F}$, or worse, by the (huge) set of symmetric differences of elements of $\mathcal{F}$. Hence, we have no indication so far that minimal differences are easy to find, although we know there are at most $|B|$ of them, since by Lemma \ref{lem_2_8} , no element of $B$ is in more than one minimal difference. In this section we show that the minimal differences show up repeatedly and in a predictable way in $\mathcal{F}$, and this will be the key to efficiently finding them in $P(\mathcal{M})$. 
+
+\begin{exmp}\label{exmp_2_9}
+Consider again the Hasse diagram in Figure \ref{FIG_2_5} . On each edge connecting an element $F^{\prime}$ with its immediate predecessor $F$, we have shown the set $F^{\prime} \backslash F$. The interesting point to note is that each of these differences is a minimal difference of $\mathcal{F}$. In this section we will prove that this is true for any ring of sets; this will make it possible to identify the minimal differences of a ring of sets without knowing its irreducible elements, and that will be crucial in efficiently building $\Pi(\mathcal{M})$, our desired representation of $\mathcal{M}$.
+\end{exmp}
+
+A chain $C=\left\{C_1, \ldots, C_q\right\}$ in $\mathcal{F}$ is an ordered set of elements of $\mathcal{F}$ such that $C_i$ is an immediate predecessor of $C_{i+1}$, for each $i \leq i \leq q-1$. An $F_0$-chain is a chain that extends from the minimal element of $\mathcal{F}, F_0$, and a maximal $F_0$-chain, or maximal chain for short, is a chain that extends from $F_0$ to the maximal element $F_z$ of $\mathcal{F}$.
+
+\begin{lemma}\label{lem_2_11}
+Let $F$ and $F^{\prime}$ be any elements of $\mathcal{F}$ (not necessarily irreducible), and suppose $F$ is an immediate predecessor of $F^{\prime}$ in $\mathcal{F}$. Then $F^{\prime} \backslash F$ is a minimal difference of $\mathcal{F}$, that is, it is an element of $D(\mathcal{F})$.
+\end{lemma}
+
+
+ \begin{proof}
+ Suppose $F^{\prime} \backslash F=D$, and let $\bar{F}$ be a minimal element of $\mathcal{F}$ that contains $D$. It is then immediate that $\bar{F} \subseteq F^{\prime}$, that $\bar{F} \cup F=F^{\prime}$, and that $\bar{F} \nsubseteq F$, so $\bar{F} \neq F_0$. Now if $F(a)$ is not $\bar{F}$ for some given element $a \in D$, then $F(a) \subset \bar{F}$, and $F \subset(F \cup F(a)) \subset(F \cup \bar{F})=F^{\prime}$, contradicting the assumption that $F$ is an immediate predecessor of $F^{\prime}$. Hence $F(a)=\bar{F}$ for every $a \in D$, so $\bar{F}$ is an irreducible element of $\mathcal{F}$, and $D \subseteq D(\bar{F})$. Now if $D \subset D(\bar{F})$, then $F^{\prime}=(F \cup D) \subset(F \cup D(\bar{F})) \subseteq(F \cup \bar{F})=F^{\prime}$, an impossibility. Hence $D=D(\bar{F})$, and so $D$ is a minimal difference of $\mathcal{F}$.
+\end{proof}
+
+If $D$ is the difference between two consecutive elements on a chain $C$ in $\mathcal{F}$, then we say that that $C$ \textit{contains} the difference $D$, and $D$ \textit{appears} on $C$. Note that by 2.4.4, $D$ is a minimal difference of $\mathcal{F}$. The following theorem is another reflection of the way that the structure of $\mathcal{F}$ is determined and expressed by its minimal differences.
+
+\begin{theorem}\label{thm_2_1}
+If $F^{\prime}$ and $F$ are any two elements in $\mathcal{F}$ such that $F$ precedes $F^{\prime}$, then every chain from $F$ to $F^{\prime}$ in $\mathcal{F}$ contains exactly the same set of minimal differences, although in a different order. In particular, if $F=F_0$, then every $F_0$-chain ending at $F^{\prime}$ contains the same set of minimal differences.
+\end{theorem}
+
+\begin{proof}
+    Let $C$ be a chain that leads from $F$ to $F^{\prime}$. Clearly, $F^{\prime} \backslash F$ is the union of the consecutive (minimal) differences along $C$. But by Corollary \ref{cor_2_3}, this set of minimal differences must be unique, and the theorem follows.
+\end{proof}
+
+\begin{corollary}\label{cor_2_5}
+If $C$ is any maximal chain in $\mathcal{F}$, then each difference of consecutive elements on $C$ is a minimal difference of $\mathcal{F}$, and each minimal difference of $\mathcal{F}$ appears exactly once as a difference of consecutive elements on $C$.
+\end{corollary}
+
+\begin{corollary}\label{cor_2_6}
+    Every maximal chain in $\mathcal{F}$ has exactly $|D(\mathcal{F})|+1$ elements.
+\end{corollary}
+
+Corollary \ref{cor_2_5} will be the key to efficiently finding the minimal differences of $P(\mathcal{M})$, without needing to know in advance the matchings in $I(\mathcal{M})$.
+
+Theorem \ref{thm_2_1} and its corollaries are very clearly illustrated in Figure \ref{FIG_2_5}. For example, there are three chains from $F_2$ to $F_{13}$. Each contains the minimal differences $\{f\},\{g\}$, and $\{h, i\}$, but in a different order on each chain. 
+
+\subsection{Relating Chains to Closed Subsets}
+
+Theorem \ref{thm_2_1} establishes a one-one correspondence between the elements of $\mathcal{F}$ and certain subsets of $D(\mathcal{F})$. However, established a one-one correspondence result between the elements of $\mathcal{F}$, and the closed subsets of $D(\mathcal{F})$. How these two correspondences relate to each other ? The answer is that they are identical.
+
+\begin{theorem}\label{thm_2_2}
+    The set of minimal differences along any $F_0$-chain $C$ is a closed subset of $D(\mathcal{F})$. Conversely, if $S$ is a closed subset of $D(\mathcal{F})$ corresponding to element $F \in \mathcal{F}$, then the $F_0$-chain in $\mathcal{F}$ ending at $F$ contains exactly the elements of $S$.
+\end{theorem}
+
+\begin{proof}
+    Let $C$ end with element $F \in \mathcal{F}$. Clearly, $F$ is the union of $F_0$ and the differences of consecutive elements on $C$. Now by Corollary \ref{cor_2_5} , each of these consecutive differences is a minimal difference of $\mathcal{F}$, so $F$ is the union of $F_0$ and a set of minimal differences of $\mathcal{F}$. But by Lemma \ref{lem_2_9}, $F$ can be expressed in only one such way, and so by correspondence result the minimal differences on $C$ must be the minimal differences in the closed subset of $D(\mathcal{F})$ that generates $F$. Conversely, if $S$ is a closed subset of $D(\mathcal{F})$ corresponding to element $F \in \mathcal{F}$, and $C$ is any chain in $\mathcal{F}$ ending at $F$, then $F$ equals $F_0$ unioned with the minimal differences in $S$, and also equals $F_0$ unioned with the minimal differences along $C$. Then by Lemma \ref{lem_2_9}, these sets of minimal differences must be the same.
+\end{proof}
+
+\begin{exmp}\label{exmp_2_10}
+In Figure \ref{FIG_2_5} every chain from $F_0$ to $F_9$ contains the minimal differences $\{d, e\},\{g\}$, and $\{f\}$, and these minimal differences indeed form the closed subset of $D(\mathcal{F})$ that corresponds to $F_9$.
+\end{exmp}
+
+With Theorem \ref{thm_2_2} we can now establish a direct connection between the precedence relation on $D(\mathcal{F})$ and the order that the minimal differences appear on chains in $\mathcal{F}$. This relationship will be one of the keys to efficiently deducing the precedence relation on $D(\mathcal{M})$, even when the associated matchings in $I(\mathcal{M})$ are unknown.
+
+\begin{theorem}\label{thm_2_3}
+    Let $F_i$ and $F_j$ be two nonzero irreducible elements of $\mathcal{F}$. Then $D\left(F_i\right)$ precedes $D\left(F_j\right)$ in $D(\mathcal{F})$ if and only if $D\left(F_i\right)$ appears before $D\left(F_j\right)$ on every maximal chain in $\mathcal{F}$.
+\end{theorem}
+
+\begin{proof}
+    Suppose $D\left(F_i\right)$ appears before $D\left(F_j\right)$ on every maximal chain in $\mathcal{F}$. Then by Theorem \ref{thm_2_2}, $D\left(F_i\right)$ is in every closed subset of $D(\mathcal{F})$ that contains $D\left(F_j\right)$, and in particular, the closed subset consisting of all the predecessors of $D\left(F_j\right)$. Hence $D\left(F_i\right)$ does precede $D\left(F_j\right)$ in $D(\mathcal{F})$.
+
+    Conversely, suppose that $D\left(F_i\right)$ precedes $D\left(F_j\right)$ in $D(\mathcal{F})$, and hence any closed subset of $D(\mathcal{F})$ containing $D\left(F_j\right)$ also contains $D\left(F_i\right)$. Now suppose there is an $F_0$-chain $C$ in which $D\left(F_i\right)$ appears before $D\left(F_j\right)$, and let $S$ be the set of minimal differences on $C$ ending with $D\left(F_i\right)$. Then by Theorem \ref{thm_2_2}, $S$ is a closed subset of $D(\mathcal{F})$ that contains $F_i$ but not $F_j$, a contradiction.
+\end{proof}
+
+\begin{exmp}\label{exmp_2_11}
+    Consider the minimal differences $\{d, e\},\{c\}$, and $\{h, i\}$ in the partial order $D(\mathcal{F})$ of Figure \ref{FIG_2_8} . The minimal difference $\{d, e\}$ precedes $\{h, i\}$ in $D(\mathcal{F})$ and, as shown in Figure \ref{FIG_2_5},$\{d, e\}$ appears before $\{h, i\}$ on every maximal chain in $\mathcal{F}$. Also in that figure, there are chains in which $\{c\}$ appears before $\{d, e\}$, and chains where it appears after $\{d, e\}$; as required by Theorem \ref{thm_2_3}, these two minimal differences are incomparable in $D(\mathcal{F})$.
+\end{exmp}
+

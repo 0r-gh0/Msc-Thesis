@@ -1,0 +1,93 @@
+\documentclass[english, msc, oneside]{layout/observatory-thesis}
+\usepackage[utf8]{inputenx}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{mathtools}
+\usepackage{MnSymbol}
+
+
+\usepackage{graphicx} 
+\usepackage{amsmath,amssymb,amsthm}
+
+\usepackage{mdframed}
+\usepackage{lipsum}
+
+\theoremstyle{definition}
+\newtheorem{exmp}{Example}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newmdtheoremenv{theo}{\textbf{Results}}
+
+
+\begin{document}
+
+
+\title{\textbf{On the Stable Matching \\Lattices}}
+\subtitle{Structure and Representation of all Stable Matchings} 
+\subject{\thesistypeshort thesis}
+\author{Argha Sardar}
+\studentid{21510035}
+\supervisor{Dr. Neeldhara Misra}
+\projectstart{August 2022}
+\projectend{April 2023}
+\affiliation{Discipline of Mathematics, IIT Gandhinagar}
+\address{Indian Institute of Technology, Gandhinagar, Gujarat 382355, India}
+\coverimage{layout/figures/free_frontpage/1.jpg}
+\covercredit{Night sky by John Fowler} 
+
+\frontmatter 
+
+\makecover 
+\maketitle 
+
+\dedication{Dedicated to my Maa and Baba who believed in me.}
+
+\disclaimer
+
+\input{frontmatter/abstract}
+\input{frontmatter/acknowledgements.tex}
+\tableofcontents
+
+
+\mainmatter 
+
+\chapter{Stable Matching}
+
+\input{chap-one/one-one}
+
+\input{chap-one/one-two}
+
+\input{chap-one/one-three}
+
+\input{chap-one/one-four}
+
+\input{chap-one/one-five}
+
+\chapter{Representations}
+
+\input{chap-two/two-one}
+
+\input{chap-two/two-two}
+
+\input{chap-two/two-three}
+
+\input{chap-two/two-four}
+
+\input{chap-two/two-five}
+
+\chapter{Rotations}
+
+\input{chap-three/three-one}
+
+\input{chap-three/three-two}
+
+\input{chap-three/three-three}
+
+\input{chap-three/three-four}
+
+\bibliographystyle{unsrt}
+\bibliography{bib.bib}
+\end{document}

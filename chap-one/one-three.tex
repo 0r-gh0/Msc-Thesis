@@ -1,0 +1,233 @@
+\section{The Gale \& Shapley's Algorithm}
+
+In 1962, \textbf{David Gale} and \textbf{Lloyd Shapley} proved that every instance of the \textbf{Stable marriage problem} admits at least one stable matching. Gale and Shapley proved this result by describing an algorithm that is guaranteed to find such a matching. Furthermore, Gale and Shapley showed that their algorithm  simultaneously gives all the men (or all the women, if the roles of the sexes are reversed) the best partner that they can have in any stable matching\cite{marden}. 
+
+\subsection{The Algorithm}
+
+\begin{center}
+\begin{minipage}{.9\linewidth}
+\begin{algorithm}[H]
+\caption{The Gale-Shapley algorithm}
+\begin{algorithmic}[1]
+
+\State Assign each person to be free
+\While{some man $m$ is free}
+    \State $w$ $\coloneqq$ first woman on $m$'s list to whom $m$ has not yet proposed\;
+    \If {$w$ is free}
+        \State assign $m$ and $w$ to be engaged {to each other}
+    \Else
+        \If {$w$ prefers $m$ to her fiancé $m_0$}
+            \State assign $m$ and $w$ to be engaged and $m_0$ to be free
+        \Else
+            \State $w$ rejects $m$ {and $m$ remains free}
+        \EndIf
+    \EndIf
+\EndWhile
+\State output the stable matching consisting of the $n$ engaged pairs
+\end{algorithmic}
+\end{algorithm}
+\end{minipage}
+\begin{figure}[ht]
+  \caption{The Gale \& Shapley's Algorithm}
+  \label{FIG_1_8}
+\end{figure}
+
+\end{center}
+
+\subsection{Some questions}
+\begin{itemize}
+\item Does a stable solution to the marriage problem always exist?
+\item Can we compute such a solution efficiently?
+\item Can we compute the best stable solution efficiently?
+\end{itemize}
+
+\subsection{Some Questions : Algorithm Termination}
+
+\begin{theorem}\label{thm_1_1}
+Gale-Shapley's Algorithm terminates in polynomial time (at most $n^2$ iterations of the outer loop).
+\end{theorem}
+
+\begin{proof}
+Consider the following \textit{observations}:
+\begin{enumerate}
+\item Once a woman has a proposal, she will always have a proposal
+\item If at least one woman has no proposals, then there exists at least one woman that has
+multiple proposals.
+\item Suppose every woman has at least one proposal, then every woman has exactly one
+proposal and the Gale-Shapley algorithm terminates.
+\end{enumerate}
+\end{proof}
+
+\subsection{Some Questions : Algorithm's running time}\label{thm_1_2}
+
+\begin{theorem}
+    If there are $n$ men and women, the Gale-Shapley algorithm terminates in atmost $n^2 - n + 1$ rounds.
+\end{theorem}
+
+\begin{proof}
+    Since the algorithm’s input is a pair of $n \times n$ matrices
+    \begin{enumerate}
+        \item \textbf{Observations}
+        \begin{enumerate}
+            \item A man can get rejected at most $n-1$ times
+            \item Every non-terminal stage there is at least one rejection
+            \item Every woman will receive a proposal before termination
+        \end{enumerate}
+           
+        \item \textbf{Proof}
+        \begin{enumerate}
+            \item \textbf{Initial proposal} : 1 stage
+            \item Suppose every man gets rejected exactly $n-1$ times: $n\cdot(n-1)$ stages
+            \item \textbf{Final proposal} : 1 stage
+            \item Total number of stages \textit{(worst-case)}: ${n\cdot(n-1)}+1 = n^2-n+1$
+        \end{enumerate}
+    \end{enumerate}
+\end{proof}
+
+\subsection{The worst case instance}
+Consider an instance of $n$ men and women where their choices are positioned a following manner.
+\begin{center}
+\begin{tabular}{ cc }   % top level tables, with 2 columns
+\begin{tabular}{ |c || c c c c c| } 
+\hline
+$1$ & $1$ & $2$ & \ldots & $n-1$ & $n$\\
+\hline
+$2$ & $2$ & $3$ & \ldots & $1$ & $n$\\
+\hline
+$3$ & $3$ & $4$ & \ldots & $2$ & $n$\\
+\hline
+\ldots & & & \ldots & & \\
+\hline
+$n-1$ & $n-1$ & $1$ & \ldots & $n-2$ & $n$\\
+\hline
+$n$ & $1$ & $2$ & \ldots & $n-1$ & $n$\\
+\hline
+\end{tabular} &  % starting rightmost sub table
+% table 2
+\begin{tabular}{ |c || c c c c c| } 
+\hline
+$1$ & $2$ & $3$ & \ldots & $n$ & $1$\\
+\hline
+$2$ & $3$ & $4$ & \ldots & $1$ & $2$\\
+\hline
+$3$ & $4$ & $5$ & \ldots & $2$ & $3$\\
+\hline
+\ldots & & & \ldots & & \\
+\hline
+$n-1$ & $n$ & $1$ & \ldots & $n-2$ & $n-1$\\
+\hline
+$n$ & $1$ & $2$ & \ldots & $n-1$ & $n$\\
+\hline
+\end{tabular}\\ \\
+Men's Preferences & Women's Preferences \\
+\end{tabular}
+
+\begin{figure}[ht]
+  \caption{Worst Case}
+  \label{FIG_1_9}
+\end{figure}
+
+\end{center}
+
+\textit{Note :} In the instance specified by the preference lists in the above table, if the men begin their proposal sequences in strict numerical order, and the implementation strategy described above, involving a stack, is followed, then it may be verified that the $i^{th}$ proposal is from man $((i-1) \mod\:n) + 1$ to woman $((i-1) \mod(n-1))+1$, for $i = 1, \ldots n^2-n$, and the last proposal is from man $1$ to woman $n$.
+
+\subsection{Some Questions : Perfect matching}
+
+\begin{theorem}\label{thm_1_3}
+    Gale-Shapley's Algorithm results in a perfect matching
+\end{theorem}
+
+\begin{proof}
+    Let's proof by the method of contradiction : 
+\begin{enumerate}
+    \item WLOG let $m$ is unmatched at termination.
+    \item $\longrightarrow$ there exist another women $w$ who is still unmatched upon termination of the Gale Shapley's Algorithm.
+    \item Once a woman is matched, she is never unmatched; she only swaps partners. Thus, nobody proposed to $w$.
+    \item But, the man $m$ proposes to every woman, since $m$ ends up unmatched.
+    \item Now, at any stage since $w$ was unmatched $m$ must have proposed to $w$ and, she should have accepted that proposal : By \textbf{GS algorithm}.
+\end{enumerate}
+So, a contradiction arises which results into a perfect matching.
+\end{proof}
+
+\subsection{Stability}
+
+\begin{theorem}\label{thm_1_4}
+    The Gale-Shapley's Algorithm results in a stable matching (i.e., there are no blocking pairs).
+\end{theorem}
+
+\begin{proof}
+    Assume $m$ and $w$ form a blocking pair
+\begin{enumerate}
+    \item \textbf{CASE} : $m$ never proposed to $w$
+    \begin{enumerate}
+        \item $GS:$ men proposes in order of preferences
+        \item $m$ prefers current partner $w^\prime > w$
+        \item $\longrightarrow$ $m$ and $w$ are not blocking
+    \end{enumerate}
+       
+    \item \textbf{CASE} : When $m$ proposed to $w$
+    \begin{enumerate}
+        \item $w$ rejected $m$ at some point
+        \item $GS:$ women only reject for better partners
+        \item $w$ prefers current partner $m^\prime > m$
+        \item $\longrightarrow$ $m$ and $w$ are not blocking
+    \end{enumerate}
+\end{enumerate}
+Case $\#1$ and $\#2$ exhaust space, hence contradiction so no blocking pair arises.
+\end{proof}
+
+\subsection{Man Optimal and Pessimal}
+Let's ask some question regarding man optimality and pessimality
+    \begin{enumerate}
+        \item Let $\mathbb{S}$ be the set of stable matchings.
+        \item $m$ is a \textbf{valid partner} of $w$ if there exists some stable matching $S$ in $\mathbb{S}$ where they are paired.
+    \end{enumerate}
+A matching is \textbf{Man-optimal} if each man receives his \textbf{best valid} partner.
+    \begin{enumerate}
+        \item Is this a perfect matching?
+        \item Is this a stable matching?
+    \end{enumerate}
+A matching is \textbf{Man-pessimal} if each man receives his \textbf{worst valid} partner.
+    \begin{enumerate}
+        \item Is this a perfect matching?
+        \item Is this a stable matching?
+    \end{enumerate}
+
+\subsection{Man Optimal}
+
+\begin{theorem}\label{thm_1_5}
+    \textit{Gale-Shapley} : with the man proposing results in a \textit{man optimal} matching
+\end{theorem}
+
+\begin{proof}
+Let's proof using the method of contradiction.
+    \begin{enumerate}
+    \item Men proposes in order, let at least one man was rejected by a valid partner.
+    \item Let $m$ and $w$ be the first such pair to get rejected in $S$, \\ ($m$ and $w$`s engagement gets jilted)
+    \item Happens because $w$ is matched with some $m^\prime > m$
+    \item Let $S^\prime$ be a stable matching with $m, w$ paired
+    \item Let $w^\prime$ be partner of $m^\prime$ in $S^\prime$
+    \item $m^\prime$ was not rejected by valid woman in S before $m$ was rejected by $w$ \\ (by assump.) $\longrightarrow$ $m^\prime$  prefers $w$ to  $w^\prime$ 
+    \item But $w$ prefers $m^\prime$ over $m$, her partner in $S^\prime$ $\longrightarrow$ $m^\prime$ and $w$ forms a blocking pair in $S^\prime$
+\end{enumerate}
+Hence, a contradiction arises which affects the stability of matching, so our claim is verified.\cite{The_SMP}
+\end{proof}
+
+\subsection{Woman Pessimal}
+
+\begin{theorem}
+    \textit{Gale-Shapley} : with the man proposing results in a \textit{woman pessimal} matching
+\end{theorem}
+
+\begin{proof}\label{thm_1_6}
+Let's proof using the method of contradiction.
+    \begin{enumerate}
+    \item Let us assume $m$ and $w$ matched in $S$, $m$ is not worst valid
+    \item $\longrightarrow$ there exists a stable matching $S^\prime$ with $w$ paired to $m^\prime < m$
+    \item Let us consider $w^\prime$ be a partner of $m$ in $S^\prime$
+    \item $m$ prefers to $w$ to $w^\prime$ (by Man optimality)
+    \item $\longrightarrow$ $m$ and $w$ forms blocking pair in $S^\prime$
+\end{enumerate}
+
+Hence, a contradiction arises which affects the stability of matching, so our claim is verified
+\end{proof}

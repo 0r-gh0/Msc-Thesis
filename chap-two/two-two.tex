@@ -1,0 +1,43 @@
+\section{Generalizing to a ring of set}
+Despite the possibility of constructing the partial order of irreducible matchings $I(\mathcal{M})$ in $\mathcal{O}(n^5)$ time, which facilitates the development of polynomial time algorithms for various problems related to stable marriage, these algorithms are not the most optimal known solutions for these problems.
+
+In order to enhance computational efficiency, our approach involves the creation of a distinct, yet intimately related construct known as $\Pi(\mathcal{M})$, which can be generated from the preference lists within $\mathcal{O}(n^2)$ time. This newly proposed structure exhibits several valuable algorithmic properties that are not present in $I(\mathcal{M})$.
+
+To facilitate the development of $\Pi(\mathcal{M})$, the initial step involves exploring the more comprehensive issue of effectively compacting the representation of a ring of sets. This entails creating a representation that is more general than $I(\mathcal{M})$, which will then be modified to form a related representation. We will discuss the construction of this representation and its efficiency in detail.
+
+\subsection{Rings of Sets}
+
+A \textbf{ring of sets} over a given set $B$, denoted by $\mathcal{F} = \{F_0 , \cdots \cdots, F_k\}$, is defined as a family of subsets of $B$ that satisfies the closure properties of \textit{set union} and \textit{intersection}. Specifically, if $F_i$ and $F_j$ are any two subsets of $B$ in $\mathcal{F}$, then $F_i \cup F_j$ and $F_i \cap F_j$ are also members of $\mathcal{F}$. Notably, since the members of $\mathcal{F}$ are subsets of $B$, if $S$ is a subset of $\mathcal{F}$, then $\cup \{F_i: F_i \in S\}$ is a set of elements of $B$ and thus belongs to $\mathcal{F}$.
+
+Given that a ring of sets adheres to the closure properties of set \textit{union} and \textit{intersection}, it follows that there exist \textit{unique minimal} and \textit{maximal} elements within $\mathcal{F}$, determined in relation to set containment. In other words, the minimal element represents a subset of every other member of $\mathcal{F}$, while the maximal element represents a superset of every other member of $\mathcal{F}$.
+
+\subsection{ The Stable Matchings Form a Ring of Sets}
+
+It is plausible to consider the set of stable matchings $M$ for a given problem instance as a ring of sets. This can be demonstrated by presenting an alternate means of characterizing a stable matching.
+
+Given a stable matching $M$, the set of all pairs $(m,w)$ where $w$ is either $p_M(m)$ (m's partner in M) or a woman whom $m$ prefers to $p_M(m)$ is referred to as the $P-set$ of $M$. We denote $P(M)$ as the $P-set$ of $M$, and $P(\mathcal{M})$ as the collection of $P-sets$ corresponding to the stable matchings of $\mathcal{M}$. It is noteworthy that a subset $P$ of the $n^2$ man-woman pairs is a P-set \textit{if and only if} $P = P(M)$ for some stable matching $M$.
+
+It is important to observe that if $P$ corresponds to a $P-set$ of an unknown stable matching $M$, then $M$ can be explicitly derived from $P$ by matching each man $m$ with the woman $w$ he least prefers from the pairs $(m, w)$ in $P$.
+
+%Add Figure ref here
+\begin{exmp}\label{exmp_2_3}
+    $M_0$ from Figure \ref{FIG_2_2} can be described as the $P-set$ \newline $\{(1, 5),(2, 2),(2, 3),(3, 8),(4, 3),(4, 2),(4, 7),(4, 4),(4, 1),(4, 6),(5, 7), \newline (6, 1),
+(7, 2),(8, 3),(8, 8),(8, 4)\}$.
+\end{exmp}
+
+\begin{exmp}\label{exmp_2_4}
+The $P-set$ for stable matching $M_3$ contains these pairs plus the pairs
+$\{(1, 7),(1, 1),(1, 2),(1, 6),(1, 8),(3, 5),(3, 1),(6, 6),
+(6, 7),(6, 5)\}$.
+\end{exmp}
+
+Given the above definitions, the following is now immediate.
+
+\begin{lemma}\label{lem_2_3}
+If $M$ and $M^\prime$ are two stable matchings, then $P(M \vee M^\prime) = P(M) \cup P(M^\prime)$ and $P(M \wedge M^\prime) = P(M) \cap P(M^\prime)$. 
+\end{lemma}
+
+It shows that $P(\mathcal{M})$ is a ring of sets for a marriage lattice $\mathcal{M}$. For a problem instance of size $n$, the \textit{base set} of the ring is the set of all $n^2$ man-woman pairs, and the family of $P-sets$, $P(\mathcal{M})$, is closed under set union and intersection. Since Stable matchings are closed under $\vee$ and $\wedge$.
+
+Note that in $P(\mathcal{M})$ the man-optimal matching corresponds to the \textit{minimal} $P-set$, and the woman-optimal matching corresponds to the \textit{maximal} $P-set$.
+

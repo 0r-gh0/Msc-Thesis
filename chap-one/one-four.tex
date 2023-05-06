@@ -1,0 +1,145 @@
+\section{Lattices of stable Matching}
+
+\subsection{The Dominance}
+For a general stable marriage instance, the man optimal and woman optimal solutions are extreme stable matchings in a very precise sense, and that, in general, other stable matchings may also exist.\cite{gusfield_irving_1989} 
+
+A person $x$ is said to prefer a matching $M$ to a matching $M^\prime$, if $x$ prefers his/her partner in $M$ to his/her partner in $M^\prime$. Note that this is strict preference. Given two stable matchings $M$ and $M^\prime$, a person $x$ may prefer $M$ to $M^\prime$, or $M^\prime$ to $M$, or may, if $p_M(x) = p_{M^\prime}(x)$, be indifferent between them.
+
+\subsection{Dominance Example}
+
+\begin{itemize}
+    \item  The Man number $1$ prefers the matching $M$ to $M^\prime$ when his partner in $M$ is ranked higher than his partner in $M^\prime$ (w.r.t. Man $1$'s preference list) i.e. Man $1$ prefers the Women $1$ more than Women $2$.
+    \item Similarly the Man number $2$ prefers the matching $M^\prime$ to $M$ when his partner in $M$ is ranked lower than his partner in $M^\prime$ (w.r.t. Man $2$'s preference list) i.e. Man $2$ prefers the Women $4$ more than Women $2$.
+    \item Man $3$ has indifferent choices between his partner in matching $M$ and $M^\prime$
+\end{itemize}
+\pagebreak
+
+\begin{center}
+\begin{tabular}{ cc }   % top level tables, with 2 columns
+  
+% leftmost table of the top level table
+\begin{tabular}{ |c||c| } 
+\hline
+1 & 1 \\
+\hline
+2 & 2 \\
+\hline
+3 & 3\\
+\hline
+4 & 4\\
+\hline
+\end{tabular} &  % starting rightmost sub table
+% table 2
+\begin{tabular}{ |c||c| } 
+\hline
+1 & 2 \\
+\hline
+2 & 4 \\
+\hline
+3 & 3\\
+\hline
+4 & 1\\
+\hline
+\end{tabular}\\ \\
+Matched pairs $M$ & Matched pairs $M^\prime$
+\end{tabular}
+\begin{figure}[ht]
+  \caption{Dominance Example}
+  \label{FIG_1_10}
+\end{figure}
+\end{center}
+
+\begin{theorem}\label{thm_1_7}
+Let $M$ and $M^\prime$ be stable matchings, and suppose that $m$ and $w$ are partners in $M$ but not in $M^\prime$. Then one of $m$ and $w$ prefers $M$ to $M^\prime$, and the other prefers $M^\prime$ to $M$
+\end{theorem}
+
+\begin{proof}
+Let $\mathcal{X}$ and $\mathcal{Y}$ (respectively $\mathcal{X^\prime}$ and $\mathcal{Y^\prime}$) denote the sets of men and women who prefer $M$ to $M^\prime$ (respectively $M^\prime$ to $M$).
+
+In $M$ there can be no pair $(m, w)$ with $m \in \mathcal{X}$ , $w \in \mathcal{Y}$, for such a pair would block $M^\prime$. So every man in $\mathcal{X}$ has an $M-partner$ in $\mathcal{Y^\prime}$, and therefore $|\mathcal{X}|$ $\leq$ $|\mathcal{Y^\prime}|$
+
+Likewise, In $M^\prime$ there can be no pair $(m, w)$ with $m \in \mathcal{X^\prime}$ , $w \in \mathcal{Y^\prime}$, for such a pair would block $M$. So every man in $\mathcal{X^\prime}$ has an $M-partner$ in $\mathcal{Y}$, and therefore $|\mathcal{X^\prime}|$ $\leq$ $|\mathcal{Y}|$
+
+But, $|\mathcal{X}| + |\mathcal{X^\prime}| = |\mathcal{Y}| + |\mathcal{Y^\prime}| = N$, It follows that $|\mathcal{X}| = |\mathcal{Y^\prime}|$ and $|\mathcal{X^\prime}| = |\mathcal{Y}|$. Hence our claim is proved.
+\end{proof}
+
+
+\subsection{Better of two partners}
+
+\begin{theorem}\label{thm_1_8}
+    For a given stable marriage instance, let $M$ and $M^\prime$ be two (distinct) stable matchings. If each man is given the better of his partners in $M$ and $M^\prime$, then the result is a stable matching.
+\end{theorem}
+
+
+\begin{proof}
+    We first show that a matching results, and then that it is stable.
+    
+    If men $m$ and $m^\prime$ receive the same partner $w$, say because $(m, w)$ is a pair in $M$ and $(m^\prime , w)$ is a pair in $M^\prime$, then $m$ prefers $M$ to $M^\prime$ and $m^\prime$ prefers $M^\prime$ to $M$. Then by Theorem \ref{thm_1_7}, applied to the pair $(m, w)$ implies that $w$ prefers $m^\prime$ to $m$, and applied to the pair ($m^\prime , w)$ implies that $w$ prefers $m$ to $m^\prime$, giving a contradiction. 
+    
+    Now suppose it is blocked by $(m, w)$. Then $m$ strictly prefers $w$ to both $p_M(m)$ and $p_{M^\prime}(m)$, and $w$ strictly prefers $m$ to her partner in the new matching. If $w$ has $p_M(w)$ as her partner in this matching, then the pair $(m, w)$ blocks $M$, while if $w$ has $p_{M^\prime}(w)$ as her partner then $(m, w)$ blocks $M^\prime$. But these are the only two possibilities for $w$'s partner, so in either case there is a contradiction. 
+\end{proof}
+\newpage    
+
+\subsection{Poorer of two partners}
+
+\begin{theorem}
+    For a given stable marriage instance, let $M$ and $M^\prime$ be two (distinct) stable matchings. If each man is given the poorer of his partners in $M$ and $M^\prime$, then the result is a stable matching.
+\end{theorem}
+
+\begin{proof}
+    If each man is given the poorer of his partners in $M$ and $M^\prime$, then by the previously known Theorem, each woman receives the better of her partners in $M$ and $M^\prime$ . Hence the present lemma is just a restatement of previous theorem, with the roles of men and women interchanged.
+\end{proof}
+
+\subsection{The dominance relation}
+    For a given stable marriage instance, we define the (man-oriented) dominance relation as follows : stable matching $M$ is said to \textbf{dominate} stable matching $M^\prime$, written $M \preceq M^\prime$, if every man has \textbf{at-least as good} a partner in $M$ as he has in $M^\prime$; i.e., every man either prefers $M$ to $M^\prime$ or is indifferent between them. We use the term \textit{strictly dominates}, written $M \prec M^\prime$, if $M \preceq M^\prime$ and $M \neq M^\prime$
+    
+    Let us define: $\mathcal{M}$ to represent the set of all stable matchings for a stable marriage instance. It can be showed that the set $\mathcal{M}$ is a partial order under the dominance relation; when considered as a partial order, we denote it by $(M, \preceq)$
+    
+     \textit{Note} : There might exist some matchings $M_1$ and $M_2 \in \mathcal{M}$ such that, $M_1$ and $M_2$ are incomparable, i.e. $M \npreceq M^\prime$ and $M^\prime \npreceq M$ holds simultaneously.
+
+\subsection{The dominance relation : Woman's side}
+    An analogous woman-oriented dominance relation could be defined the same way.
+    
+    $M$ dominates $M^\prime$ from the man's point of view if and only if $M^\prime$ dominates $M$ from the woman's point of view. So the woman-oriented dominance relation is the inverse, which is denoted $\succeq$, of the man-oriented, and gives rise to the dual partial order $(M, \succeq)$.
+
+\subsubsection{Example}
+Let us consider another preference list :
+\begin{center}
+\begin{tabular}{ cc }   % top level tables, with 2 columns
+\begin{tabular}{ |c||c|c|c|c|c|c|c|c| } 
+\hline
+1 & 5 & 7 & 1 & 2 & 6 & 8 & 4 & 3\\
+\hline
+2 & 2 & 3 & 7 & 5 & 4 & 1 & 8 & 6\\
+\hline
+3 & 8 & 5 & 1 & 4 & 6 & 2 & 3 & 7\\
+\hline
+\end{tabular} &  % starting rightmost sub table
+% table 2
+\begin{tabular}{ |c||c|c|c|c|c|c|c|c|} 
+\hline
+1 & 5 & 3 & 7 & 6 & 1 & 2 & 8 & 4\\
+\hline
+2 & 8 & 6 & 3 & 5 & 7 & 2 & 1 & 4\\
+\hline
+3 & 1 & 5 & 6 & 2 & 4 & 8 & 7 & 3\\
+\hline
+\end{tabular} \\ \\
+Men's Preferences & Women's Preferences
+\end{tabular}
+\begin{figure}[ht]
+  \caption{Dominance Example}
+  \label{FIG_1_11}
+\end{figure}
+\end{center}
+\newpage
+The man-optimal matching $M_0$ \textit{dominates}, and the woman-optimal matching $M_z$ is \textit{dominated} by, all the other stable matchings. Also, as far as the stable matchings $M_1$, $M_2$ and $M_3$ are concerned, $M_1$ \textit{clearly dominates} $M_2$, but \textit{neither} of these dominates, nor is dominated by, $M_3$.
+
+    \begin{center}
+    $M_0 = \{(1, 5),(2, 3),(3, 8),(4, 6),(5, 7),(6, 1),(7, 2),(8, 4)\}$
+    $M_z = \{(1, 3),(2, 6),(3, 2),(4, 8),(5, 1),(6, 5),(7, 7),(8, 4)\}$
+    $M_1 = \{(1, 8),(2, 3),(3, 1),(4, 6),(5, 7),(6, 5),(7, 2),(8, 4)\}$
+    $M_2 = \{(1, 8),(2, 3),(3, 1),(4, 6),(5, 2),(6, 5),(7, 7),(8, 4)\}$
+    $M_3 = \{(1, 3),(2, 6),(3, 5),(4, 8),(5, 7),(6, 1),(7, 2),(8, 4)\}$
+    \end{center}
+     
